@@ -284,7 +284,7 @@ void main() {
     );
     
     // Конвертировать skybox в стиле SynthWave
-    vec3 synthColor = vec3(0.475, 0.0, 1.0);
+    vec3 synthColor = vec3(0.175, 0.0, 0.6);
     finalColor = mix(col, synthColor, 0.7);
 
     col = 1.0 - exp(-col);
