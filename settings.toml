@@ -14,8 +14,8 @@ samples = 0
 swap-interval = 1
 
 [chunks]
-load-distance = 400
-load-speed = 75
+load-distance = 22
+load-speed = 4
 padding = 2
 
 [camera]
@@ -26,7 +26,7 @@ sensitivity = 2
 
 [graphics]
 gamma = 1
-fog-curve = 6
+fog-curve = 1.6
 backlight = true
 frustum-culling = true
 skybox-resolution = 96
@@ -37,5 +37,5 @@ show-chunk-borders = false
 do-write-lights = true
 
 [ui]
-language = "ru_RU"
+language = "en_US"
 

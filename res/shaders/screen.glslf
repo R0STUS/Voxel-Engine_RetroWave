@@ -43,13 +43,13 @@ void main() {
 
     float glitchX = random(vec2(u_timer, 1.0)) * 0.1 - 0.05;
 
-    vec2 redUV = uv + vec2(0.004, 0.0);
+    vec2 redUV = uv + vec2(0.0045, 0.0);
     vec4 redColor = texture(u_texture0, redUV);
 
     vec2 greenUV = uv - vec2(0.0, 0.002);
     vec4 greenColor = texture(u_texture0, greenUV);
 
-    vec2 blueUV = uv - vec2(-0.004, 0.0);
+    vec2 blueUV = uv - vec2(-0.0045, 0.0);
     vec4 blueColor = texture(u_texture0, blueUV);
 
     f_color = vec4(redColor.r, greenColor.g, blueColor.b, 1.0);

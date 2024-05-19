@@ -21,7 +21,7 @@
   },
   "movement.crouch": {
     "type": "keyboard",
-    "code": 67
+    "code": 340
   },
   "movement.jump": {
     "type": "keyboard",
@@ -33,7 +33,7 @@
   },
   "camera.zoom": {
     "type": "keyboard",
-    "code": 96
+    "code": 67
   },
   "camera.mode": {
     "type": "keyboard",
@@ -41,7 +41,7 @@
   },
   "player.noclip": {
     "type": "keyboard",
-    "code": 86
+    "code": 78
   },
   "player.flight": {
     "type": "keyboard",
@@ -61,6 +61,6 @@
   },
   "hud.inventory": {
     "type": "keyboard",
-    "code": 69
+    "code": 258
   }
 }

@@ -25,6 +25,7 @@ menu.Create World=Stwórz świat
 world.World generator=Generator światła
 world.generators.default=Ekstremalne
 world.generators.flat=Mieszkanie
+world.generators.retrowave=RetroWave
 world.convert-request=Szykują się zmiany w indeksach! Przekształcić świat?
 
 # Ustawienia
