@@ -1,11 +1,29 @@
 in vec2 v_coord;
-layout(location = 0) out vec4 f_color;
+out vec4 f_color;
 
 uniform sampler2D u_texture0;
 uniform float u_timer;
+uniform float radius;
+uniform vec2 dir;
+uniform ivec2 u_screenSize;
+uniform float u_stripe;
 
 float random(vec2 st){
     return fract(sin(dot(st.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+vec4 applyVignette(vec4 color)
+{
+    vec2 position = (gl_FragCoord.xy / u_screenSize) - vec2(0.5);
+    float dist = length(position);
+
+    float radius = 0.88;
+    float softness = 0.375;
+    float vignette = smoothstep(radius, radius - softness, dist);
+
+    color.rgb = color.rgb - (1.0 - vignette);
+
+    return color;
 }
 
 void main() {
@@ -25,14 +43,15 @@ void main() {
 
     float glitchX = random(vec2(u_timer, 1.0)) * 0.1 - 0.05;
 
-    vec2 redUV = uv + vec2(0.005, 0.0);
+    vec2 redUV = uv + vec2(0.004, 0.0);
     vec4 redColor = texture(u_texture0, redUV);
 
-    vec2 greenUV = uv - vec2(0.0, 0.0);
+    vec2 greenUV = uv - vec2(0.0, 0.002);
     vec4 greenColor = texture(u_texture0, greenUV);
 
-    vec2 blueUV = uv - vec2(-0.005, 0.0);
+    vec2 blueUV = uv - vec2(-0.004, 0.0);
     vec4 blueColor = texture(u_texture0, blueUV);
 
     f_color = vec4(redColor.r, greenColor.g, blueColor.b, 1.0);
+    f_color = applyVignette(f_color);
 }
