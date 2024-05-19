@@ -1,0 +1,66 @@
+{
+  "movement.forward": {
+    "type": "keyboard",
+    "code": 87
+  },
+  "movement.left": {
+    "type": "keyboard",
+    "code": 65
+  },
+  "movement.back": {
+    "type": "keyboard",
+    "code": 83
+  },
+  "movement.cheat": {
+    "type": "keyboard",
+    "code": 82
+  },
+  "movement.right": {
+    "type": "keyboard",
+    "code": 68
+  },
+  "movement.crouch": {
+    "type": "keyboard",
+    "code": 67
+  },
+  "movement.jump": {
+    "type": "keyboard",
+    "code": 32
+  },
+  "movement.sprint": {
+    "type": "keyboard",
+    "code": 341
+  },
+  "camera.zoom": {
+    "type": "keyboard",
+    "code": 96
+  },
+  "camera.mode": {
+    "type": "keyboard",
+    "code": 293
+  },
+  "player.noclip": {
+    "type": "keyboard",
+    "code": 86
+  },
+  "player.flight": {
+    "type": "keyboard",
+    "code": 70
+  },
+  "player.attack": {
+    "type": "mouse",
+    "code": 0
+  },
+  "player.build": {
+    "type": "mouse",
+    "code": 1
+  },
+  "player.pick": {
+    "type": "mouse",
+    "code": 2
+  },
+  "hud.inventory": {
+    "type": "keyboard",
+    "code": 69
+  }
+}

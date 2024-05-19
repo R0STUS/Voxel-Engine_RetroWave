@@ -1,0 +1,15 @@
+{
+  "version": {
+    "major": 0,
+    "minor": 20
+  },
+  "name": "\321\213\320\262",
+  "generator": "core:default",
+  "time": {
+    "total-time": 75.2445574753219,
+    "day-time": 0.744686305522919,
+    "day-time-speed": 0.000694444461259991
+  },
+  "seed": -7421447116110314137,
+  "next-inventory-id": 3
+}

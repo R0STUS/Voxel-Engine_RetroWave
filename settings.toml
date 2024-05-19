@@ -1,0 +1,41 @@
+[audio]
+enabled = true
+volume-master = 1
+volume-regular = 1
+volume-ui = 1
+volume-ambient = 1
+volume-music = 1
+
+[display]
+fullscreen = false
+width = 1280
+height = 720
+samples = 0
+swap-interval = 1
+
+[chunks]
+load-distance = 400
+load-speed = 75
+padding = 2
+
+[camera]
+fov-effects = true
+fov = 90
+shaking = true
+sensitivity = 2
+
+[graphics]
+gamma = 1
+fog-curve = 6
+backlight = true
+frustum-culling = true
+skybox-resolution = 96
+
+[debug]
+generator-test-mode = false
+show-chunk-borders = false
+do-write-lights = true
+
+[ui]
+language = "ru_RU"
+
