@@ -33,7 +33,13 @@ void main() {
 
     vec3 color;
 
+    float offset = sin(u_timer * 0.000005) * 0.1;
+
     vec4 textureColor = texture(u_texture0, v_coord);
+
+    vec2 glitchedTexCoord = uv + vec2(offset, 0.0);
+
+    float stripeMask = smoothstep(uv.y - 0.1 / 2.0, uv.y + 0.1 / 2.0, fract(uv.y * 500));
 
     vec2 centerCoord = vec2(0.5, 0.5);
 
@@ -41,17 +47,25 @@ void main() {
 
     float centerBrightness = dot(centerColor.rgb, vec3(0.2126, 0.7152, 0.0722));
 
-    float glitchX = random(vec2(u_timer, 1.0)) * 0.1 - 0.05;
+    float glitch = random(vec2(1.0, u_timer)) * 0.5 + 0.5;
+    vec2 uvRedGlitch = mix(uv + 0.0005, glitchedTexCoord, stripeMask);
+    vec2 uvGreenGlitch = mix(uv, glitchedTexCoord, stripeMask);
+    vec2 uvBlueGlitch = mix(uv - 0.0005, glitchedTexCoord, stripeMask);
 
-    vec2 redUV = uv + vec2(0.0045, 0.0);
+    vec2 redUV = uvRedGlitch + vec2(0.0005, 0.0);
     vec4 redColor = texture(u_texture0, redUV);
 
-    vec2 greenUV = uv - vec2(0.0, 0.002);
+    vec2 greenUV = uvGreenGlitch - vec2(0.0, 0.002);
     vec4 greenColor = texture(u_texture0, greenUV);
 
-    vec2 blueUV = uv - vec2(-0.0045, 0.0);
+    vec2 blueUV = uvBlueGlitch - vec2(-0.0005, 0.0);
     vec4 blueColor = texture(u_texture0, blueUV);
 
     f_color = vec4(redColor.r, greenColor.g, blueColor.b, 1.0);
     f_color = applyVignette(f_color);
+
+    float grayscale = (f_color.r + f_color.g + f_color.b) / 3.0;
+
+    f_color = vec4(grayscale + (f_color.r * 0.9), grayscale + (f_color.g * 0.9), grayscale + (f_color.b * 0.9), f_color.a);
+    f_color = vec4(f_color.rgb * 0.65, f_color.a);
 }
