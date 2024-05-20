@@ -28,7 +28,7 @@ SOFTWARE.
 #define ATMOS_RADIUS 6471e3 /* radius of the atmosphere */
 // scattering coeffs
 #define RAY_BETA vec3(5.5e-6, 13.0e-6, 22.4e-6) /* rayleigh, affects the color of the sky */
-#define MIE_BETA vec3(0.5) /* mie, affects the color of the blob around the sun */
+#define MIE_BETA vec3(21e-6) /* mie, affects the color of the blob around the sun */
 #define AMBIENT_BETA vec3(0.0) /* ambient, affects the scattering color when there is no lighting from the sun */
 #define ABSORPTION_BETA vec3(2.04e-5, 4.97e-5, 1.95e-6) /* what color gets absorbed by the atmosphere (Due to things like ozone) */
 #define G 0.3 /* mie scattering direction, or how big the blob around the sun is */
@@ -283,16 +283,19 @@ void main() {
         LIGHT_STEPS * u_quality
     );
     
-    // Конвертировать skybox в стиле SynthWave
-    vec3 synthColor = vec3(0.175, 0.0, 0.6);
-    finalColor = mix(col, synthColor, 0.7);
-
     col = 1.0 - exp(-col);
     col = min(col, vec3(1.0));
+    col = col + 0.05;
 
-    float transition = 0.5;
-    float nightFactor = smoothstep(0.0, 0.5 + transition, -u_lightDir.y);
-    float lightness = mix(0.85, 0.2, nightFactor);
+    float dayFactor = smoothstep(0.0, 0.5, u_lightDir.y);
+    float nightFactor = smoothstep(0.0, 0.5, -u_lightDir.y);
 
-    f_color = vec4(finalColor * lightness, 1.0);
+    vec3 sunriseColor = vec3(0.75, 0.35, 0.9);
+    vec3 dayColor = vec3(0.725, 0.75, 1.0);
+    vec3 nightColor = vec3(0.75, 0.0, 1.0);
+
+    vec3 finalSkyColor = mix(sunriseColor, dayColor, dayFactor);
+    finalSkyColor = mix(finalSkyColor, nightColor, nightFactor);
+
+    f_color = vec4(finalSkyColor * col, 1.0);
 }
