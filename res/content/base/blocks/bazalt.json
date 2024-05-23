@@ -1,5 +1,4 @@
 {
     "texture": "bazalt",
-  "breakable": false,
-  "emission": [0.5, 0.0, 0.7]
+    "breakable": false
 }
