@@ -12,18 +12,40 @@ float random(vec2 st){
     return fract(sin(dot(st.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
 
+// Vignette
 vec4 applyVignette(vec4 color)
 {
     vec2 position = (gl_FragCoord.xy / u_screenSize) - vec2(0.5);
     float dist = length(position);
 
     float radius = 0.88;
-    float softness = 0.375;
+    float softness = 0.365;
     float vignette = smoothstep(radius, radius - softness, dist);
 
     color.rgb = color.rgb - (1.0 - vignette);
 
     return color;
+}
+
+// Cromatic
+vec4 apply_cromatic(vec4 col) {
+    vec2 uv = v_coord;
+    vec2 uv1 = v_coord;
+    vec2 uv2 = v_coord;
+    uv1 = (uv / 1.0125) + 0.00625;
+    uv2 = (uv / 1.025) + 0.0125;
+    vec4 r_color1 = texture(u_texture0, uv);
+    vec4 g_color1 = texture(u_texture0, uv);
+    vec4 b_color1 = texture(u_texture0, uv);
+    vec4 r_color2 = texture(u_texture0, uv1);
+    vec4 g_color2 = texture(u_texture0, uv1);
+    vec4 b_color2 = texture(u_texture0, uv1);
+    vec4 r_color3 = texture(u_texture0, uv2);
+    vec4 g_color3 = texture(u_texture0, uv2);
+    vec4 b_color3 = texture(u_texture0, uv2);
+    col = vec4((r_color1.r + r_color2.r + r_color3.r) / 3, (g_color1.g + g_color2.g + g_color2.g) / 3, 
+    (b_color1.b + b_color2.b + b_color3.b) / 3, g_color1.a);
+    return col;
 }
 
 // Retro-filter
@@ -63,6 +85,11 @@ void main() {
     vec4 blueColor = texture(u_texture0, blueUV);
 
     f_color = vec4(redColor.r, greenColor.g, blueColor.b, 1.0);
+
+    vec4 col1 = apply_cromatic(f_color);
+
+    f_color = vec4((f_color + col1) / 2);
+
     f_color = applyVignette(f_color);
 
     float grayscale = (f_color.r + f_color.g + f_color.b) / 3.0;
@@ -106,7 +133,6 @@ void main() {
     vec2 uv14 = vec2(uv.x, uv.y - 0.01);
     vec2 uv15 = vec2(uv.x, uv.y + 0.005);
     vec2 uv16 = vec2(uv.x, uv.y + 0.01);
-    textureColor = texture(u_texture0, uv);
     vec4 textureColor1 = texture(u_texture0, uv1);
     vec4 textureColor2 = texture(u_texture0, uv2);
     vec4 textureColor3 = texture(u_texture0, uv3);
