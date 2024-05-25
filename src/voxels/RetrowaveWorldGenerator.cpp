@@ -215,16 +215,16 @@ void RetrowaveWorldGenerator::generate(voxel* voxels, int cx, int cz, int seed) 
 
 
             for (int cur_y = 0; cur_y < CHUNK_H; cur_y++) {
-                int id = cur_y < SEA_LEVEL ? idBazalt : BLOCK_AIR;
+                int id = cur_y < SEA_LEVEL ? idRetroBlock : BLOCK_AIR;
                 int states = 0;
                 if ((cur_y < (height - 6)) && (cur_y > (height - 30))) {
-                    id = idBazalt;
+                    id = idRetroBlock;
                 }
                 else if (cur_y < height) {
-                    id = idBazalt;
+                    id = idRetroBlock;
                 }
                 if (cur_y <= 2)
-                    id = idBazalt;
+                    id = idRetroBlock;
                 voxels[(cur_y * CHUNK_D + z) * CHUNK_W + x].id = id;
                 voxels[(cur_y * CHUNK_D + z) * CHUNK_W + x].states = states;
             }

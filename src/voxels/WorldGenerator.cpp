@@ -15,4 +15,5 @@ WorldGenerator::WorldGenerator(const Content* content)
                  idLeaves(content->requireBlock("base:leaves").rt.id),
                  idGrass(content->requireBlock("base:grass").rt.id),
                  idFlower(content->requireBlock("base:flower").rt.id),
-                 idBazalt(content->requireBlock("base:bazalt").rt.id) {}
+                 idBazalt(content->requireBlock("base:bazalt").rt.id),
+                 idRetroBlock(content->requireBlock("base:retroblock").rt.id) {}

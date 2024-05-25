@@ -48,36 +48,6 @@ vec4 apply_cromatic(vec4 col) {
     return col;
 }
 
-// Motion Blur
-vec4 apply_moBlur(vec4 col2) {
-    vec2 uv = v_coord;
-    vec2 uv12 = v_coord;
-    vec2 uv22 = v_coord;
-    uv12 = (uv / 1.0125) + 0.00625;
-    uv22 = (uv / 1.025) + 0.0125;
-    vec4 r_color12 = texture(u_texture0, uv);
-    vec4 g_color12 = texture(u_texture0, uv);
-    vec4 b_color12 = texture(u_texture0, uv);
-    vec4 r_color22 = texture(u_texture0, uv12);
-    vec4 g_color22 = texture(u_texture0, uv12);
-    vec4 b_color22 = texture(u_texture0, uv12);
-    vec4 r_color32 = texture(u_texture0, uv22);
-    vec4 g_color32 = texture(u_texture0, uv22);
-    vec4 b_color32 = texture(u_texture0, uv22);
-    r_color12 = vec4(((r_color12.rgb - 0.55) * 100), r_color12.a);
-    g_color12 = vec4(((g_color12.rgb - 0.55) * 100), g_color12.a);
-    b_color12 = vec4(((b_color12.rgb - 0.55) * 100), b_color12.a);
-    r_color22 = vec4(((r_color22.rgb - 0.55) * 100), r_color22.a);
-    g_color22 = vec4(((g_color22.rgb - 0.55) * 100), g_color22.a);
-    b_color22 = vec4(((b_color22.rgb - 0.55) * 100), b_color22.a);
-    r_color32 = vec4(((r_color32.rgb - 0.55) * 100), r_color32.a);
-    g_color32 = vec4(((g_color32.rgb - 0.55) * 100), g_color32.a);
-    b_color32 = vec4(((b_color32.rgb - 0.55) * 100), b_color32.a);
-    col2 = vec4((r_color12.r + r_color22.r + r_color32.r) / 3, (g_color12.g + g_color22.g + g_color22.g) / 3, 
-    (b_color12.b + b_color22.b + b_color32.b) / 3, g_color12.a);
-    return col2;
-}
-
 // Retro-filter
 void main() {
     float totalWeight = 0.0;
@@ -120,11 +90,9 @@ void main() {
 
     f_color = vec4(f_color.r + 0.175, f_color.g, f_color.b + 0.2, f_color.a) - 0.125;
 
-    vec4 moBlur = apply_moBlur(f_color);
-
     vec4 col1 = apply_cromatic(f_color);
 
-    f_color = vec4((f_color + col1 + moBlur * 0.001) / 2);
+    f_color = vec4((f_color + col1) / 2);
 
     f_color = apply_vignette(f_color);
 

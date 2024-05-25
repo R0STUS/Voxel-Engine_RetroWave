@@ -19,6 +19,7 @@ protected:
 	blockid_t const idGrass;
 	blockid_t const idFlower;
 	blockid_t const idBazalt;
+	blockid_t const idRetroBlock;
 public:
 	WorldGenerator(const Content* content);
     virtual ~WorldGenerator() = default;

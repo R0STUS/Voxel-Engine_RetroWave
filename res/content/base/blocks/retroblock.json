@@ -1,0 +1,5 @@
+{
+  "texture": "retroblock",
+  "breakable": false,
+  "emission": [5, 0, 10]
+}
