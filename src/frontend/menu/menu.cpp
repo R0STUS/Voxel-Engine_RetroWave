@@ -45,7 +45,7 @@ namespace menus {
 void menus::create_version_label(Engine* engine) {
     auto gui = engine->getGUI();
     auto vlabel = std::make_shared<gui::Label>(
-        util::str2wstr_utf8("RW ")
+        util::str2wstr_utf8(" ")
 //        util::str2wstr_utf8(ENGINE_VERSION_STRING+" development build ")
     );
     vlabel->setZIndex(1000);
